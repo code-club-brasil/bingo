@@ -10,8 +10,10 @@ import (
 
 const cols, rows, totalCardNumbers, totalBalls = 5, 5, 24, 75
 
+// Random is global variable used to control Seed value
 var Random = rand.New(rand.NewSource(time.Now().UnixNano()))
 
+// NewCard takes an io.Writer and prints a new bingo Card
 func NewCard(w io.Writer) {
 	randomCard := Random.Perm(75)
 	for i, card := range randomCard[:25] {
@@ -27,6 +29,7 @@ func NewCard(w io.Writer) {
 	fmt.Fprintln(w)
 }
 
+// Raffle takes no arguments and loops until someone win the game
 func Raffle() {
 	// B    I      N      G      O
 	// 1 2  16 17  31 32  46 47  61 62
