@@ -4,6 +4,8 @@
 
 Este repo tem o objetivo de criar um jogo de Bingo escrito em [GoLang] (https://golang.org/), usando técnicas de aprendizagem peer-2-peer para contribuir e ensinar e aprender com os membros do grupo sobre Go e avançar os estudos sobre Desenvolvimento de Software.
 
+Assista os vídeos das sessões no [Youtube](https://www.youtube.com/channel/UCmN80L4nKmb7vNQQLT4GucQ).
+
 ## Como contribuir
 
 ** TLDR: **
