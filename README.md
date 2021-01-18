@@ -4,7 +4,7 @@ Portuguese Version in [LEIAME.md](LEIAME.md)
 
 ## Objective
 
-This repo has the objective to create a Bingo game written in [GoLang](https://golang.org/), using peer to peer learning techniques to contribute and teach each of the willing members to lern more about the language and advance in one's studies about Software Developing and Go.
+This repo host a Bingo game is written in [GoLang](https://golang.org/), using peer to peer learning techniques to contribute and teach each of the willing members to learn more about the language and advance in one's studies about Software Developing.
 
 ## How to contribute
 
@@ -21,4 +21,3 @@ For Versioning the best practices is, following SemVer : https://semver.org/
 
 Although this is not a enterprise account and GitHub protection is not enabled at the time this document is written, please only push through PRs. If you don't know how to create a PR here is the link for it. 
  - https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request
-
