@@ -4,11 +4,14 @@ import (
 	"fmt"
 	"io"
 	"math/rand"
-	"os"
+	"strconv"
 	"time"
 )
 
-const cols, rows, totalCardNumbers, totalBalls = 5, 5, 24, 75
+const (
+	sortedColor = "\033[1;36m%s\033[0m\t"
+	totalBalls  = 75
+)
 
 // Random is global variable used to control Seed value
 var Random = rand.New(rand.NewSource(time.Now().UnixNano()))
@@ -29,37 +32,46 @@ func NewCard(w io.Writer) {
 	fmt.Fprintln(w)
 }
 
-// Raffle takes no arguments and loops until someone win the game
-func Raffle() {
-	// B    I      N      G      O
-	// 1 2  16 17  31 32  46 47  61 62
-	// 3 4  18 19
-	// 5 6  20 21
-	// 7 8
-	// ...
-	// 15
+// PrintBoard takes map of integer containing an empty struct to control balls already revealed and an integer with the last ball revealed in order to print the main board.
+func PrintBoard(revealed map[int]struct{}, lastRevealed int) {
+	pace := 0
+	headers := [10]int{1, 2, 16, 17, 31, 32, 46, 47, 61, 62}
+	fmt.Println("B                I                N                G                O")
+	for x := 0; x < 8; x++ {
+		for y := 0; y < 10; y++ {
+			// skip 16, 31, 46, 61 and 76
+			if x == 7 && (headers[y]+pace)%15 == 1 {
+				fmt.Print("        ")
+				continue
+			}
+			_, ok := revealed[headers[y]+pace]
+			if !ok {
+				fmt.Print(headers[y]+pace, "\t")
+				continue
+			}
+			fmt.Printf(sortedColor, strconv.Itoa(headers[y]+pace))
+		}
+		fmt.Println()
+		pace += 2
+	}
+	fmt.Printf("Ultimo numero sorteado: %d\n", lastRevealed)
+}
+
+// Run takes no parameter and run until the game is finished
+func Run() {
 	var bingo bool
 	randomCard := Random.Perm(totalBalls)
+	revealed := make(map[int]struct{}, 1)
+	var enter string
 	for !bingo {
 		n := randomCard[0]
 		randomCard = randomCard[1:]
-		fmt.Println(len(randomCard))
-		fmt.Println(n)
-		os.Exit(0)
+		revealed[n] = struct{}{}
+		PrintBoard(revealed, n)
+		fmt.Printf("Alguem ganhou? [s|n]")
+		fmt.Scanln(&enter)
+		if enter == "s" {
+			bingo = true
+		}
 	}
-	fmt.Println("      B       I     N      G     O")
-	for x := 1; x <= 14; x += 2 {
-		b1 := x
-		b2 := x + 1
-		i1 := b1 + 15
-		i2 := b2 + 15
-		n1 := i1 + 15
-		n2 := i2 + 15
-		g1 := n1 + 15
-		g2 := n2 + 15
-		o1 := g1 + 15
-		o2 := g2 + 15
-		fmt.Printf("%4d %4d %4d %4d %4d %4d %4d %4d %4d %4d\n", b1, b2, i1, i2, n1, n2, g1, g2, o1, o2)
-	}
-	fmt.Printf("%6d %10d %9d %10d %8d\n", 15, 30, 45, 60, 75)
 }
