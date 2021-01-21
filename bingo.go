@@ -63,6 +63,14 @@ func Run() {
 	randomCard := Random.Perm(totalBalls)
 	revealed := make(map[int]struct{}, 1)
 	var enter string
+
+	//exchange number 0 for 75
+	for i := 0; i < len(randomCard); i++ {
+		if randomCard[i] == 0 {
+			randomCard[i] = 75
+		}
+	}
+
 	for !bingo {
 		n := randomCard[0]
 		randomCard = randomCard[1:]
