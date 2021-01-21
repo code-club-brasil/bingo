@@ -32,6 +32,7 @@ func NewCard(w io.Writer) {
 	fmt.Fprintln(w)
 }
 
+// PrintBoard takes map of integer containing an empty struct to control balls already revealed and an integer with the last ball revealed in order to print the main board.
 func PrintBoard(revealed map[int]struct{}, lastRevealed int) {
 	pace := 0
 	headers := [10]int{1, 2, 16, 17, 31, 32, 46, 47, 61, 62}
@@ -56,6 +57,7 @@ func PrintBoard(revealed map[int]struct{}, lastRevealed int) {
 	fmt.Printf("Ultimo numero sorteado: %d\n", lastRevealed)
 }
 
+// Run takes no parameter and run until the game is finished
 func Run() {
 	var bingo bool
 	randomCard := Random.Perm(totalBalls)
