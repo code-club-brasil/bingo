@@ -2,7 +2,6 @@ package bingo_test
 
 import (
 	"bingo"
-	"bytes"
 	"testing"
 )
 
