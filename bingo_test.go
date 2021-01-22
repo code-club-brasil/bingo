@@ -9,10 +9,8 @@ import (
 func TestNewCard(t *testing.T) {
 	t.Parallel()
 
-	wantLen := 106
-	var buffer bytes.Buffer
-	bingo.NewCard(&buffer)
-	if buffer.Len() != wantLen {
-		t.Errorf("want %d, got %d", wantLen, buffer.Len())
+	card := bingo.NewCard()
+	if len(card) != 25 {
+		t.Errorf("Wrong card length %d", len(card))
 	}
 }
